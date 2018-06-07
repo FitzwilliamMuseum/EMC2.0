@@ -1,4 +1,5 @@
-<h1 class="contenth1">Advanced Search</h1>
+<div class="inner_right">
+<h1>Advanced Search</h1>
 <p>Use the below form to generate a complex query.</p>
 <form class="advanced_search_form" method="post" id="advanced_search" name="advanced_search" action="Advanced_search_results.php">
 <div class="select">
@@ -69,4 +70,7 @@
 
 
 </form>
-<input type="submit" form="advanced_search" value="Search"></input>
+<div class="submit_button_wrap">
+<input class="submit_button" type="submit" form="advanced_search" value="Search"></input>
+</div>
+</div>

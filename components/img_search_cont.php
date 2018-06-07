@@ -17,7 +17,7 @@
   <option value="500"> 500 </option>
   <option value="1000"> 1000 </option>
  </select>
-<button Adv_search type="submit"> Search </button>
+<button class="submit_button" Adv_search type="submit"> Search </button>
 
 
 
