@@ -1,0 +1,1 @@
+<option></option><option>?</option><option>base metal</option><option>bronze</option><option>copper</option><option>copper alloy</option><option>gold</option><option>gold plated on lead</option><option>lead</option><option>orichalc</option><option>pale gold</option><option>silver</option><option>silver-plated</option><option>tremissis</option>
