@@ -70,7 +70,24 @@
 
 
 </form>
+<input type=checkbox id="imagefree" form="advanced_search" name=imagefree></input>
+ <label for="imagefree">Check for image-free search.</label>
+
 <div class="submit_button_wrap">
 <input class="submit_button" type="submit" form="advanced_search" value="Search"></input>
 </div>
+<script>
+$("#imagefree").change(function(){
+
+  if(this.checked) {
+
+
+        $("#advanced_search").attr('action','image_free_query.php');
+   }else{
+        $("#advanced_search").attr('action','Advanced_search_results.php');
+   }
+
+
+})
+</script>
 </div>

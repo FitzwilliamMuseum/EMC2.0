@@ -5,56 +5,147 @@
 
 include("components/dbconnect.php");
 
+/* capture posted data as variables */
+
 $tablecontent = '';
-$wildcard = '*';
-$soundq = $_POST["search"] . $wildcard;
-$soundq = strip_tags($soundq);
-$column = $_REQUEST['column'];
-$column = strip_tags($column);
-$amount = $_REQUEST['amount'];
-$amount = strip_tags($amount);
+$conditions = [];
+$rulername= [];
+$kingdom = [];
+$mint = [];
+$moneyernorm = [];
+$moneyeroncoin = [];
+$county = [];
+$findspot = [];
+$type = [];
+$denomination = [];
+$EMCnumb = [];
+$metal = [];
+$column = "RulerName";
+$column2 = "StateName";
+$column3 = "MintName";
+$column6 = "tblFindspot_County";
+$column7 = "FindspotName";
+$column8 = "objNum";
+$column9 = "Denomination";
+$column10 = "Metal";
+$tablecontent = '';
+/* build query based on current advanced builder system */
+
+
+if (!empty($_POST['rulername']))
+    {
+           $localconditions = [];
+           $name = $_POST['rulername'];
+           $parameters[] = "$name";
+           $localconditions[] = "$column = ?";
+           $conditions[] = "(".implode(" AND ", $localconditions).")";
+    }
+if (!empty($_POST['kingdom']))
+    {
+           $localconditions = [];
+           $kingdom = $_POST['kingdom'];
+           $parameters[] = "$kingdom";
+           $localconditions[] = "$column2 = ?";
+           $conditions[] = "(".implode(" AND ", $localconditions).")";
+    }
+if (!empty($_POST['mint']))
+    {
+           $localconditions = [];
+           $mint = $_POST['mint'];
+           $parameters[] = "$mint";
+           $localconditions[] = "$column3 = ?";
+           $conditions[] = "(".implode(" AND ", $localconditions).")";
+    }
+if (!empty($_POST['moneyernorm']))
+    {
+           $localconditions = [];
+           $moneyernorm = $_POST['moneyernorm'];
+           $parameters[] = "$moneyernorm ";
+           $localconditions[] = "$column4 = ?";
+           $conditions[] = "(".implode(" AND ", $localconditions).")";
+    }
+if (!empty($_POST['$moneyeroncoin']))
+    {
+           $localconditions = [];
+           $moneyeroncoin = $_POST['$moneyeroncoin'];
+           $parameters[] = "$moneyeroncoin ";
+           $localconditions[] = "$column5 = ?";
+           $conditions[] = "(".implode(" AND ", $localconditions).")";
+    }
+if (!empty($_POST['county']))
+    {
+           $localconditions = [];
+           $county = $_POST['county'];
+           $parameters[] = "$county ";
+           $localconditions[] = "$column6 = ?";
+           $conditions[] = "(".implode(" AND ", $localconditions).")";
+    }
+
+if (!empty($_POST['Find-spot']))
+   {
+           $localconditions = [];
+           $findspot = $_POST['Find-spot'];
+           $parameters[] = "$findspot";
+           $localconditions[] = "$column7 = ?";
+           $conditions[] = "(".implode(" AND ", $localconditions).")";
+    }
+
+if (!empty($_POST['emcnumb']))
+    {
+           $localconditions = [];
+           $EMCnumb = $_POST['emcnumb'];
+           $parameters[] = "$EMCnumb";
+           $localconditions[] = "$column8 = ?";
+           $conditions[] = "(".implode(" AND ", $localconditions).")";
+
+    }
+
+if (!empty($_POST['Denomination']))
+    {
+           $localconditions = [];
+           $denomination = $_POST['Denomination'];
+           $parameters[] = "$denomination";
+           $localconditions[] = "$column9 = ?";
+           $conditions[] = "(".implode(" AND ", $localconditions).")";
+    }
+if (!empty($_POST['Metal']))
+    {
+           $localconditions = [];
+           $metal = $_POST['Metal'];
+           $parameters[] = "$metal";
+           $localconditions[] = "$column10 = ?";
+           $conditions[] = "(".implode(" AND ", $localconditions).")";
+    }
+
+    $sql = "SELECT * FROM gallifrey";
 
 
 
 
 
-if (strlen($soundq) >= '4') {
-
-	if ($column == 'All') {
 
 
-$selectStmt = $db->prepare("SELECT DISTINCT * FROM gallifrey  WHERE MATCH ( RulerName, Period, Metal ) AGAINST(:soundq IN BOOLEAN MODE)  LIMIT $amount OFFSET 0");
+     $sql .= " WHERE ".implode(" AND ",  $conditions);
 
-}
-else {
+     $stmt = $db->prepare($sql);
+     $stmt->execute($parameters);
 
-$selectStmt = $db->prepare("SELECT DISTINCT * FROM gallifrey WHERE MATCH ( `$column` ) AGAINST(:soundq IN BOOLEAN MODE) LIMIT $amount OFFSET 0");
-};
-
-$selectStmt->execute(array(
+     $results = $stmt->fetchAll();
 
 
 
-	':soundq'=>$soundq.'%'
 
-)); //execute the query
-$results = $selectStmt->fetchall(); //fetch results
+foreach ($results as $result)
 
-
-$a = 0;
-
-/* MATCH( RulerName, Period, Metal ) AGAINST(:q) < removing for test */
-
-
- foreach ($results as $result)
-
-  {
+     {
 
 
 
-     $filename = $result['objNum'] . "obv.jpg";
-     $emptyfile = "noimg.jpg";
-     $tablecontent = $tablecontent
+        $objnum = str_replace('.','_',$result['objNum']);
+        $emptyfile = "noimg.jpg";
+        $rulername = $result['RulerName'];
+        $tablecontent = $tablecontent
+
 
 
 
@@ -80,6 +171,12 @@ unset($result); /* Really Important, this clears "Result" to prevent iterations 
 
 
   }
+
+ if(empty($results)) {
+	 
+
+echo "Sorry, no results, please go back to <a href='advanced_search.php'> advanced search </a> and perform another query.";
+
 
  }
 

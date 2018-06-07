@@ -2,18 +2,12 @@
 
 
 
-/* Connect to Database etc. */
+header('Content-Type: text/html; charset=utf-8');
 
-  $dsn = 'mysql:host=127.0.0.1:8889;dbname=EMC';
-  $user = 'root';
-  $password = 'root';
-try {
- $pdo = new PDO($dsn, $user, $password);
-   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-       } catch (PDOException $e) {
-     echo 'Connection failed: ' . $e->getMessage();
-           die('Sorry, database problem');
-       }
+
+
+//connect to the DB
+include("/Applications/MAMP/htdocs/EMC/components/dbconnect.php");
 
 /* capture posted data as variables */
 
@@ -39,7 +33,6 @@ $column8 = "objNum";
 $column9 = "Denomination";
 $column10 = "Metal";
 $tablecontent = '';
-
 /* build query based on current advanced builder system */
 
 
@@ -138,10 +131,11 @@ if (!empty($_POST['Metal']))
 
      $sql .= " WHERE ".implode(" AND ",  $conditions);
 
-     $stmt = $pdo->prepare($sql);
+     $stmt = $db->prepare($sql);
      $stmt->execute($parameters);
 
      $results = $stmt->fetchAll();
+
 
 
 
@@ -180,6 +174,9 @@ foreach ($results as $result)
 
 
      }
+
+
+
 
 
 

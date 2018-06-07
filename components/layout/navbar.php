@@ -6,7 +6,6 @@
   <ul class=navid><a href="index.php"><li id=navlist>Home</li></a></ul>
   <ul class=navid><a href="search.php"><li id=navlist>Search</li></a></ul>
   <ul class=navid><a href="advanced_search.php"><li id=navlist>Advanced Search</li></a></ul>
-  <ul class=navid><a href="image_free_search.php"><li id=navlist>Image-free Search</li></a></ul>
   <ul class=navid><a href="contact.php"><li id=navlist>Contact</li></a></ul>
   <ul class=navid><a href="about.php"><li id=navlist>About</li></a></ul>
   <ul class=navid><a href="search_help.php"><li id=navlist>Search Help</li></a></ul>
@@ -18,7 +17,6 @@
 <ul class=navid><a href="index.php"><li id=navlist>Home</li></a></ul>
 <ul class=navid><a href="search.php"><li id=navlist>Search</li></a></ul>
 <ul class=navid><a href="advanced_search.php"><li id=navlist>Advanced Search</li></a></ul>
-<ul class=navid><a href="image_free_search.php"><li id=navlist>Image-free Search</li></a></ul>
 <ul class=navid><a href="contact.php"><li id=navlist>Contact</li></a></ul>
 <ul class=navid><a href="about.php"><li id=navlist>About</li></a></ul>
 <ul class=navid><a href="search_help.php"><li id=navlist>Search Help</li></a></ul>
