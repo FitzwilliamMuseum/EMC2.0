@@ -2,10 +2,12 @@ $(document).ready(function(){
   $('#Mint_list').addClass("hidden");
   $('#Period_list').addClass("hidden");
   $('#Parish_list').addClass("hidden");
-
+  $("#Metal_list").addClass("hidden");
   $('#mint_load_More').click(function() {
 
       $('#Mint_list').toggleClass("hidden");
+      $('#Period_list').addClass("hidden");
+          $('#metal_list').addClass("hidden");
 
 
   });
@@ -16,6 +18,9 @@ $(document).ready(function(){
   $('#Ruler_load_More').click(function() {
 
       $('#Ruler_list').toggleClass("hidden");
+        $('#Period_list').addClass("hidden");
+            $('#Metal_list').addClass("hidden");
+              $('#Mint_list').addClass("hidden");
 
 
   });
@@ -25,6 +30,8 @@ $(document).ready(function(){
   $('#Period_load_More').click(function() {
 
       $('#Period_list').toggleClass("hidden");
+        $('#Ruler_list').addClass("hidden");
+          $('#metal_list').addClass("hidden");
 
 
   });
@@ -34,13 +41,61 @@ $(document).ready(function(){
 
 
   });
+  $('#Metal_load_More').click(function() {
+
+      $('#Metal_list').toggleClass("hidden");
+      $('#Ruler_list').addClass("hidden");
+        $('#Period_list').addClass("hidden");
+
+
+  });
+
+// EMC / SCBI only filter
+
+
+
+// Get your select dropdown by id (eg: $('#filtlist');)
+var select = document.getElementById('filtlist');
+
+
+// Apply an event listener with callback to select element
+// (eg: select.on('change', callbackfunction());)
+select.addEventListener('change', e => {
+  // get all matching elements to classname ( $('.imghalf'); )
+  var elements = document.getElementsByClassName('imghalf');
+
+  // if selected option is '' make everything visible and return
+  if (e.target.value === '') {
+    Array.prototype.forEach.call(elements, val => { val.classList.remove('hidden') });
+    return;
+  }
+  // grab and format selected option to a number
+  var option = Number(e.target.value);
+
+  //  Foreach is exactly what you would expect for each value in collection, do this function (maybe - $.each(elements, function); )
+  Array.prototype.forEach.call(elements, val => { val.classList.add('hidden'); });
+  // filter by matching data option to select option, returns HTMLCollection
+  let visible = Array.prototype.filter.call(elements, val => Number(val.dataset.emcscbi) === option);
+  // Make matching elements visible
+  Array.prototype.forEach.call(visible, val => { val.classList.remove('hidden') })
+});
+
+
+
+// BEGIN FILTER SCRIPT
+
+
+
+        var selected = [];  // the current selection of applied filters.
 
 
 
 
-        var selected = [];
         $('.css-checkbox').click(function() {
-              var box = $(this).attr('name'); // Checboxes value
+
+
+
+              var box = $(this).attr('name'); // the value of the box being checked.
               var datatype = $(this).data("type"); // Checkboxes filter category
 
 
@@ -48,60 +103,74 @@ $(document).ready(function(){
            selected.push($(this).attr('name')); // Push names of Selected filters into an array
         // Displays current filter selection to the user
 
-          $(".imghalf").each(function() {  // Iterate through each record
+
+        $(".imghalf").each(function() {  // Iterate through each record
 
 
             var  recordsdata = [];  // This creates an Array of all the records data attributes
             recordsdata.push($(this).data("mint"));
             recordsdata.push($(this).data("ruler"));
             recordsdata.push($(this).data("period"));
-            var datainselection = []; // creates array for all the records data that is in current seleciton.
+            recordsdata.push($(this).data("metal"));
+            var matched_data = []; // creates array for all the records data that is in current seleciton.
+
+
+             // Following IF statements check records data array and puts the key into another array, if it matches
+             // the filters value,  e.g. if filters selected value was "silver" it would put data into matched_data if
+             // "silver" was the value of key 3 of the recordsdata array.
+
 
 
             if($.inArray(recordsdata[0], selected) != -1) {
 
-              datainselection.push($(this).data("mint"));
+              matched_data.push($(this).data("mint"));
 
 
             }
             if($.inArray(recordsdata[1], selected) != -1) {
 
-              datainselection.push($(this).data("ruler"));
+              matched_data.push($(this).data("ruler"));
 
 
             }
             if($.inArray(recordsdata[2], selected) != -1) {
 
-              datainselection.push($(this).data("period"));
+              matched_data.push($(this).data("period"));
+
+
+            }
+            if($.inArray(recordsdata[3], selected) != -1) {
+
+              matched_data.push($(this).data("metal"));
 
 
             }
 
             var i = 0;
-            var len = datainselection.length;
+            var len = recordsdata.length;
             for (; i < len; i++ ) {
-               if ( $.inArray(datainselection[i], selected) != -1) {
+               if ( $.inArray(recordsdata[i], selected) == -1 ) { // if the records data doesn't match the active array
 
-                   var matchesall = "true";
-                   continue;
-
-               }
-               else if ( $.inArray(datainselection[i], selected) != 1) {
-
-                  var matchesall = "false";
-                  break;
+                 $(this).removeClass("selected").addClass("hidden").removeClass("visible");
+                 continue; // cycle through every key
 
                }
+               else {
 
-               // if element IS in array continue, else if an element isn't in array break the loop and return the array as false.
+               $(this).addClass("visible").removeClass("hidden").removeClass("selected");
+               break;
+
+               // if something matches display it and break the cycle
+               }
+
+            }
+
+ console.log(recordsdata);
+ console.log(selected);
 
 
 
 
-
-            } // Loop that checks all the data in the selection matches the data in dataselection and breaks if one isn't met.
-            //this is used for a test later on, that checks if the matches all variable is true.
-              console.log(matchesall);
             switch(datatype) {
 
             case "mint":
@@ -116,40 +185,18 @@ $(document).ready(function(){
             case "parish":
             var data = $(this).data("mint");
             break;
+            case "metal":
+            var data = $(this).data("metal");
+            break;
 
 
             }
-            console.log(data);
 
-            if( box != data)  { // If it doesn't match
-              if ( $(this).hasClass( "selected" )) {
-                if ( $.inArray(data, selected) != -1) {
-                // if has class "selected"
-                // And if any data the value of the selection IN THE ARRAY
-                   }
-                else { // If it doesn't match the value of the selection, remove that class.
 
-                $(this).removeClass("selected").addClass("hidden").removeClass("visible");
-                }
-              } //code block for if element has class "selected" and doesn't match (i.e. if a second/third check is selected).
-              else {
-                   $(this).addClass("hidden").removeClass("visible");
-              }
-            }
-           else {  // if the checkbox datas value matches the records
-                 if ( matchesall == false ) { // if it doesn't match ALL the criteria hide it
-                    $(this).removeClass("selected").addClass("hidden").removeClass("visible");
-
-                 }
-                 else if ( matchesall == true) {
-
-                       $(this).addClass("selected").removeClass("hidden").addClass("visible");
-
-                 }
-                 }
 
       }); // End of iteration for when a box is checked.
-      } //code block for if checkbox is checked.
+    } //end of code block for if checkbox is checked.
+
      else  {
 
         var remove = $(this).attr('name');
@@ -165,6 +212,7 @@ $(document).ready(function(){
       recordsdata.push($(this).data("mint"));
       recordsdata.push($(this).data("ruler"));
       recordsdata.push($(this).data("period"));
+      recordsdata.push($(this).data("metal"));
 
 
 
@@ -182,29 +230,17 @@ $(document).ready(function(){
                   case "parish":
                   var data = $(this).data("mint");
                   break;
+                  case "mint":
+                  var data = $(this).data("metal");
+                  break;
 
 
                 }
 
 
 
-    if ( $.inArray(recordsdata[0], selected) != -1 ||
-         $.inArray(recordsdata[1], selected) != -1 ||
-         $.inArray(recordsdata[2], selected) != -1)
 
-    {
 
-  // If when unchecked, the values do not match
-        // Need to make an array of all of records Data-attributes and compare it to those
-        // first array needs iterating over.
-         $(this).addClass("visible").removeClass("hidden").addClass("selected");
-
-    }
-    else {
-
-       $(this).removeClass("selected").addClass("hidden").removeClass("visible");
-
-    }
     });
 
     }
@@ -220,17 +256,3 @@ $(document).ready(function(){
     document.getElementById("filter_display").innerText = selected;
 
     });
-new function clear() {
-
-  if (selected.length === 0 ) {
-
-  $(".imghalf").each(function() {
-
-    $(this).addClass("visible").removeClass("hidden").removeClass("selected");
-
-  });
-
-    }
-    document.getElementById("filter_display").innerText = selected;
-
-    };

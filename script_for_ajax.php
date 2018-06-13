@@ -52,7 +52,7 @@ $a = 0;
 
 
 
-     .'<div class=imghalf id=imghalf data-emcscbi='. $result['NotSingleFind?'].' data-period="'.$result['Period'].'" data-metal="'.$result['Metal'].'" data-mint="'.$result['MintName'].'" data-ruler="'. $rulername . '">'
+     .'<div class=imghalf id=imghalf data-score=0 data-emcscbi='. $result['NotSingleFind?'].' data-period="'.$result['Period'].'" data-metal="'.$result['Metal'].'" data-mint="'.$result['MintName'].'" data-ruler="'. $rulername . '">'
      .'<ul id=coincard>'
      .'<img class=coinimg src=http://www-img.fitzmuseum.cam.ac.uk/img/emc/300jpg/'.$objnum . 'obv.jpg'.' onError="imgError(this);"</img>'
      .'<li class=coincarditem>'.' EMC NUMBER: '. $result['objNum']. '</li>'

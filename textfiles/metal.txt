@@ -1,0 +1,15 @@
+<div class="checkbox_wrap"><input class="css-checkbox" name="" type="checkbox" data-type="metal" id="" value=""></input>
+<label class="css-label" for=""></label></div><div class="checkbox_wrap"><input class="css-checkbox" name="?" type="checkbox" data-type="metal" id="?" value="?"></input>
+<label class="css-label" for="?">?</label></div><div class="checkbox_wrap"><input class="css-checkbox" name="base metal" type="checkbox" data-type="metal" id="base metal" value="base metal"></input>
+<label class="css-label" for="base metal">base metal</label></div><div class="checkbox_wrap"><input class="css-checkbox" name="bronze" type="checkbox" data-type="metal" id="bronze" value="bronze"></input>
+<label class="css-label" for="bronze">bronze</label></div><div class="checkbox_wrap"><input class="css-checkbox" name="copper" type="checkbox" data-type="metal" id="copper" value="copper"></input>
+<label class="css-label" for="copper">copper</label></div><div class="checkbox_wrap"><input class="css-checkbox" name="copper alloy" type="checkbox" data-type="metal" id="copper alloy" value="copper alloy"></input>
+<label class="css-label" for="copper alloy">copper alloy</label></div><div class="checkbox_wrap"><input class="css-checkbox" name="gold" type="checkbox" data-type="metal" id="gold" value="gold"></input>
+<label class="css-label" for="gold">gold</label></div><div class="checkbox_wrap"><input class="css-checkbox" name="gold plated on lead" type="checkbox" data-type="metal" id="gold plated on lead" value="gold plated on lead"></input>
+<label class="css-label" for="gold plated on lead">gold plated on lead</label></div><div class="checkbox_wrap"><input class="css-checkbox" name="lead" type="checkbox" data-type="metal" id="lead" value="lead"></input>
+<label class="css-label" for="lead">lead</label></div><div class="checkbox_wrap"><input class="css-checkbox" name="orichalc" type="checkbox" data-type="metal" id="orichalc" value="orichalc"></input>
+<label class="css-label" for="orichalc">orichalc</label></div><div class="checkbox_wrap"><input class="css-checkbox" name="pale gold" type="checkbox" data-type="metal" id="pale gold" value="pale gold"></input>
+<label class="css-label" for="pale gold">pale gold</label></div><div class="checkbox_wrap"><input class="css-checkbox" name="silver" type="checkbox" data-type="metal" id="silver" value="silver"></input>
+<label class="css-label" for="silver">silver</label></div><div class="checkbox_wrap"><input class="css-checkbox" name="silver-plated" type="checkbox" data-type="metal" id="silver-plated" value="silver-plated"></input>
+<label class="css-label" for="silver-plated">silver-plated</label></div><div class="checkbox_wrap"><input class="css-checkbox" name="tremissis" type="checkbox" data-type="metal" id="tremissis" value="tremissis"></input>
+<label class="css-label" for="tremissis">tremissis</label></div>

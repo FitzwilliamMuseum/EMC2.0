@@ -23,14 +23,13 @@
               <option value="0">EMC only</option>
               <option value="1">SCBI only</option>
               </select>
-              <select name="Metal filter" class="filter_list"id="filtlist3" type="select">
+                  <div class="filter_container">
+              <button class="search_button" id="Metal_load_More" form="">show metals</button>
+              <div class="select_container"  id="Metal_list">
               <option value="">All Metals</option>
-              <option value="gold">gold</option>
-              <option value="pale gold">pale gold</option>
-              <option value="silver">silver</option>
-              <option value="copper alloy">copper alloy</option>
-              <option value="copper">copper</option>
-              </select>
+              <?php include("/Applications/MAMP/htdocs/EMC/textfiles/metal.txt")?>
+            </div>
+          </div>
 
                 <div class="filter_container">
                 <button class="search_button" id="Period_load_More" form="">show periods</button>

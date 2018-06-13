@@ -12,6 +12,6 @@
 </body>
 <?php include("components/layout/footer.php")?>
 <script>
-<?php include("javascript/search_filter.js")?>
+<?php include("javascript/new_filter.js")?>
 </script>
 </html>
