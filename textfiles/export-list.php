@@ -8,12 +8,12 @@ $statement = $db->prepare("SELECT DISTINCT RulerName FROM gallifrey ORDER BY Rul
 $statement->execute();
 $results = $statement->fetchall();
 foreach ($results as $result) {
-  # code...
+    # code...
 
-  $list = $list
+    $list = $list
 
-.'<div class="checkbox_wrap"><input class="css-checkbox" name="'.  $result['RulerName'].'" type="checkbox" data-type="ruler" id="'. $result['RulerName'] .'" value="' . $result['RulerName'] .'"></input>
-<label class="css-label" for="'.$result['RulerName'].'">'.$result['RulerName'].'</label></div>';
+        . '<div class="checkbox_wrap"><input class="css-checkbox" name="' . $result['RulerName'] . '" type="checkbox" data-type="ruler" id="' . $result['RulerName'] . '" value="' . $result['RulerName'] . '"></input>
+<label class="css-label" for="' . $result['RulerName'] . '">' . $result['RulerName'] . '</label></div>';
 
 }
 
@@ -23,7 +23,6 @@ $current = $list;
 
 
 file_put_contents($file, $current);
-
 
 
 ?>
