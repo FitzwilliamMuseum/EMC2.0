@@ -73,12 +73,14 @@ function imgError(image) {
 // This shows the filters after somebody has started typing in the emc search bar
   function showfilters() {
   str2 = $(".search_bar").val().length;
+  var x = window.matchMedia("(min-width: 700px)")
   $('.search_bar').keyup(function() {
-    if (str2 > 2) {
+    if (str2 > 2 && x.matches) {
              $('#select_wrap').css("display","flex");
              return false;
          } else {
          $('#select_wrap').hide();
+         $('#Search_Result').css("margin-top","50px");
          };
 
 

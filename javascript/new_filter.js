@@ -92,10 +92,13 @@ $('.css-checkbox').click(function() {
 // when the box is checked
 
   if(this.checked) {
+
     // Put the name attr of the box into an array for displaying on UI
     selected.push($(this).attr('name'));
       // Begin iterating through each record, this is where the matching happens.
        $(".imghalf").each(function() {
+
+         console.log("record");
          // This creates an Array of all the records data attributes
 
          var recordmint = $(this).data("mint");
@@ -145,16 +148,27 @@ $('.css-checkbox').click(function() {
 
         }
 
-       if ((eval(test))) {
 
 
+    //   if ((eval(test))) {
+    if (
+      (active_metals.length === 0 || $.inArray(recordmetal, active_metals) != -1 )
+      &&
+      (active_periods.length === 0 || $.inArray(recordperiod, active_periods)  != -1)
+      &&
+      (active_mints.length === 0 || $.inArray(recordmint, active_mints)  != -1)
+      &&
+      (active_rulers.length === 0 || $.inArray(recordruler, active_rulers) != -1 )
+    ) {
 
-        $(this).addClass("visible").removeClass("hidden").removeClass("selected");
+
+    $(this).addClass("visible").removeClass("hidden").removeClass("selected");
+
 
         }
         else {
-        $(this).removeClass("selected").addClass("hidden").removeClass("visible");
 
+$(this).removeClass("selected").addClass("hidden").removeClass("visible");
 
         }
 
@@ -212,100 +226,87 @@ $('.css-checkbox').click(function() {
    $(".imghalf").each(function() {
 
 
-     var recordsdata = [];
-     recordsdata.push($(this).data("mint"));
-     recordsdata.push($(this).data("ruler"));
-     recordsdata.push($(this).data("period"));
-     recordsdata.push($(this).data("metal"));
      var recordmint = $(this).data("mint");
      var recordruler = $(this).data("ruler");
      var recordperiod = $(this).data("period");
      var recordmetal =  $(this).data("metal");
+     // This needs to check each array, if it has data in matches agaisnt the records values.
 
-     switch (datatype) {
-     case "mint":
-     param = recordmint;
-     break;
-     case "metal":
-     param = recordmetal;
-     break;
-     case "period":
-     param = recordperiod;
-     break;
-     case "ruler":
-     param = recordruler;
-     break;
+    var test = '';
 
+    if ( active_mints.length != 0 ) {
 
-     }
+    test += '$.inArray(recordmint, active_mints) != -1 &&'
+    }
 
 
 
-    if ( selected.length == 0 ) {
+    if ( active_rulers.length != 0) {
 
-   $(this).addClass("visible").removeClass("hidden").removeClass("selected");
+   test += '$.inArray(recordruler, active_rulers) != -1 &&'
+
+    }
+
+
+
+
+    if ( active_periods.length != 0 ) {
+
+  test += '$.inArray(recordperiod, active_periods) != -1 &&'
+    }
+
+
+
+
+    if ( active_metals.length != 0 ) {
+
+  test +=  '$.inArray(recordmetal, active_metals) != -1 &&'
 
 
     }
-    else if  ( selected.length == 1 ) {
 
-      if ($.inArray(param, active) != -1) {
+    if (test.endsWith("&&") ) {
 
-          $(this).addClass("visible").removeClass("hidden").removeClass("selected");
-
-
-
-      }
-    else if (selected.length > 2 ) {
-
-      var i = 0;
-      var len = selected.length;
-      for (; i < len; i++ ) {
-         if ( $.inArray(selected[i], recordsdata) == -1 ) { // if not present
-
-           $(this).removeClass("visible").addClass("hidden").removeClass("selected");
-           break;
-
-         }
-         else {
-
-         $(this).addClass("visible").removeClass("hidden").removeClass("selected");
-
-
-         // if something matches display it and break the cycle
-         }
-
-      }
-
- }
-
-      else {
-
-        $(this).removeClass("selected").addClass("hidden").removeClass("visible");
+      test = test.slice(0, -2);
 
 
 
-      }
+    }
+
+
+    if (
+      (active_metals.length == 0 || $.inArray(recordmetal, active_metals) != -1 )
+      &&
+      (active_periods.length == 0 || $.inArray(recordperiod, active_periods)  != -1)
+      &&
+      (active_mints.length == 0 || $.inArray(recordmint, active_mints)  != -1)
+      &&
+      (active_rulers.length == 0 || $.inArray(recordruler, active_rulers) != -1 )
+    ) {
 
 
 
 
+    $(this).addClass("visible").removeClass("hidden").removeClass("selected");
+
+    }
+    else {
+    $(this).removeClass("selected").addClass("hidden").removeClass("visible");
+
+
+    }
+ });
+}
+  if (selected.length == 0) {
+
+   $(".imghalf").each(function() {
+
+       $(this).addClass("visible").removeClass("hidden").removeClass("selected");
+
+   });
 
 
   }
-
-
-
-
-
-
-
-
-
-
-  });
-}
-
   document.getElementById("filter_display").innerText = "Filters: " + selected;
   window.scrollTo(0, 0);
 });

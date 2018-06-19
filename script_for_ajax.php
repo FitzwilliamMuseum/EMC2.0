@@ -20,7 +20,7 @@ if (strlen($soundq) >= '4') {
 
           if ($column == 'All') {
 
-						$selectStmt = $db->prepare("SELECT DISTINCT * FROM gallifrey WHERE MATCH ( Metal, Period, RulerName ) AGAINST(:soundq IN BOOLEAN MODE) LIMIT 300 OFFSET 0");
+						$selectStmt = $db->prepare("SELECT DISTINCT * FROM gallifrey WHERE MATCH ( Metal, Period, RulerName ) AGAINST(:soundq IN BOOLEAN MODE) LIMIT 1000 OFFSET 0");
 
 
 					}

@@ -12,11 +12,12 @@
                  <?php include("components/search_components/load_columns.php") ?>
                 </select>
                 <input class="search_bar" type="text" placeholder="Start typing to search..." name="search" onkeyup="showResult(this.value,column_select.value); showfilters()" >
-
+                <div id="filter_display">
+                </div>
                 </div>
 
                <div id="select_wrap">
-                  <input class="search_button"  id="Heat_map" type="submit" formaction="map.php" value="Heat Map">  </input>
+                  <button class="search_button"  id="Heat_map" type="submit" formaction="map.php" value="Heat Map">Heat Map  </button>
 
               <select name="EMC/SCBI filter" class="filter_list" id=filtlist type="select">
               <option value="">EMC and SCBI</option>
@@ -61,8 +62,7 @@
 
 
                   </div>
-<div id="filter_display">
-</div>
+
 
                 </form>
 
