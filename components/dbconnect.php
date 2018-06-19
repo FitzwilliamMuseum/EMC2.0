@@ -1,8 +1,13 @@
 <?php
+
+$db = parse_ini_file("EMC/components/config/db.ini");
+
 //connect to the DB
- $dsn = 'mysql:host=localhost:8889;dbname=EMC;charset=utf8';
-   $user = 'root';
-   $password = 'root';
+   $dsn = $db['type']
+   . ":host=" . $db['host'] . ";dbname=" . $db['name'] . ";charset=utf8";
+   $user = $db['user'];
+   $password = $db['pass'];
+
 
 
 try {
