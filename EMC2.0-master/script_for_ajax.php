@@ -17,15 +17,13 @@ $soundq = $soundq . $wildcard;
 
 if (strlen($soundq) >= '4') {
 
-  //  if ($column == 'All') {
+     // This requires indexes to be built into the database or it wont work, needs to be a balance between distinct enough queries 
+     // and things that people are likely to search for.
+  
 
         $selectStmt = $db->prepare("SELECT DISTINCT * FROM gallifrey WHERE MATCH ( Metal, Period, RulerName) AGAINST(:soundq IN BOOLEAN MODE) LIMIT 1000 OFFSET 0");
 
-
-  //  } else {
-
-    //    $selectStmt = $db->prepare("SELECT DISTINCT * FROM gallifrey WHERE MATCH ( `$column` ) AGAINST(:soundq IN BOOLEAN MODE) LIMIT 300 OFFSET 0");
-  //  };
+  
 
     $selectStmt->bindParam(':soundq', $soundq, PDO::PARAM_STR, 12);
     $selectStmt->execute(); //execute the query
