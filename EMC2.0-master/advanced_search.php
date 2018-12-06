@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html>
+<title>EMC Advanced Search</title>
+<?php include("components/layout/header.php") ?>
+<body>
+<div class="body_wrap">
+    <?php include("components/layout/navbar.php") ?>
+    <div class=Right_Side>
+        <?php include("components/search_components/advanced_search.php") ?>
+    </div>
+</div>
+</body>
+<?php include("components/layout/footer.php") ?>
+</html>
