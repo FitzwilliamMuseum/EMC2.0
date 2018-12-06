@@ -35,7 +35,8 @@ include("components/search_components/fusion_map_query.php");
           mapTypeId: 'terrain'
 
         });
-
+         
+          // This is making a call to the google fusion table, the "from" is the table ID. 
 
         var layer = new google.maps.FusionTablesLayer({
           query: {
