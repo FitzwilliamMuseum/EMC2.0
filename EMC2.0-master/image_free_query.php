@@ -176,7 +176,7 @@ if ($_GET['emc-scbi'] == "EMC") {
 $sql = "SELECT * FROM gallifrey";
 
 
-$sql .= " WHERE " . implode(" AND ", $conditions) ."ORDER BY tblMain_TypeID ASC";
+$sql .= " WHERE " . implode(" AND ", $conditions) ."ORDER BY CoinID, tblMain_TypeID ASC";
 
 $stmt = $db->prepare($sql);
 $stmt->execute($parameters);
@@ -185,15 +185,15 @@ $results = $stmt->fetchAll();
 
 
 foreach ($results as $result) {
-    
+
    if(is_null($result['Weight'])) {
-   
+
    $weight = "";
 
    }
   else {
   $weight = "g";
-    } 
+    }
 
     $objnum = str_replace('.', '_', $result['objNum']);
     $emptyfile = "noimg.jpg";
@@ -237,4 +237,3 @@ if (empty($results)) {
 
 echo $tablecontent;
 ?>
-

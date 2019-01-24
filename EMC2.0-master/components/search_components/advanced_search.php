@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="assets/multiple-select.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
 <div class="inner_right">
 <h1>Advanced Search</h1>
 <p>Use the below form to generate a complex query.</p>
@@ -107,9 +109,27 @@
   <input name="emcnumb" class="advanced_freetext" placeholder="EMC Number / SCBI Number">
 </div>
 <!--<div class="select">-->
-  <select name="Metal[]" multiple="multiple" id="metalslc">
-  <?php include("textfiles/advanced_search/advanced-metal.txt") ?>
-</select>
+<div class="text-input ui-widget">
+  <input id="pres" class="advanced_freetext" name="Preservation" placeholder="Condition (e.g. pierced, cut)"></input>
+</div>
+<script>
+  $( function() {
+    var availableTags = [
+      "pierced",
+      "loop",
+      "bent",
+      "mounted",
+      "overstruck",
+      "clipped",
+      "snicked",
+      "plated"
+
+    ];
+    $( "#pres" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  </script>
 <script>
    $('#metalslc').multipleSelect({
 
@@ -130,8 +150,6 @@
 <div class="text-input">
   <input class="advanced_freetext" name="enddate" placeholder="to"></input>
 </div>
-
-
 </form>
 <input type=checkbox id="imagefree" form="advanced_search" name=imagefree></input>
  <label for="imagefree">Check for image-free search.</label>

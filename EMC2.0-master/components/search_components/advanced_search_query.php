@@ -33,6 +33,7 @@ $column10 = "Metal";
 $column11 = "TypeName";
 $column12 = "BeginProd";
 $column13 = 'NotSingleFind';
+$column14 = "Preservation";
 
 
 $tablecontent = '';
@@ -161,6 +162,35 @@ if (!empty($_GET['startdate']) AND !empty($_GET['enddate']))
                $conditions[] = "(".implode(" AND ", $localconditions).")";
         }
 
+    if (!empty($_GET['Preservation']))
+    {
+        $localconditions = [];
+        $Preserved= $_GET['Preservation'];
+        if (strcasecmp($Preserved,"Pierced") == 0) {
+        $Preserved = '%' . $Preserved . '%';
+        $Preservations = array($Preserved,"%Piercing%");
+        foreach ($Preservations as $Preservation) {
+        $Preservation = strip_tags($Preservation);
+        $parameters[] = "$Preservation";
+        $localconditions[] = "$column14 LIKE ?";
+
+
+        }
+        }
+        else {
+        $Preserved = preg_replace('/[^a-z0-9]/i', '_', $Preserved);
+        $Preserved = '%' . $Preserved . '%';
+        $parameters[] = "$Preserved";
+        $localconditions[] = "$column14 LIKE ?";
+
+
+      }
+
+
+        $conditions[] = "(".implode(" OR ", $localconditions).")";
+    }
+
+
 
 if ($_GET['emc-scbi'] == "EMC") {
 
@@ -186,7 +216,7 @@ else {}
 
 
 
-     $sql .= " WHERE ".implode(" AND ",  $conditions) ."ORDER BY tblMain_TypeID ASC LIMIT 2000";
+     $sql .= " WHERE ".implode(" AND ",  $conditions) ."ORDER BY CoinID, tblMain_TypeID ASC LIMIT 2000";
      $stmt = $db->prepare($sql);
      $stmt->execute($parameters);
      $results = $stmt->fetchAll();

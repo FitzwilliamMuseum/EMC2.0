@@ -21,7 +21,7 @@ if (strlen($soundq) >= '4') {
      // and things that people are likely to search for.
   
 
-        $selectStmt = $db->prepare("SELECT DISTINCT * FROM gallifrey WHERE MATCH ( Metal, Period, RulerName) AGAINST(:soundq IN BOOLEAN MODE) LIMIT 1000 OFFSET 0");
+        $selectStmt = $db->prepare("SELECT DISTINCT * FROM gallifrey WHERE MATCH ( Metal, Period, RulerName) AGAINST(:soundq IN BOOLEAN MODE) LIMIT 3000 OFFSET 0");
 
   
 

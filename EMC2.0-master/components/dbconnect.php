@@ -1,7 +1,7 @@
 <?php
 
 
-$db = parse_ini_file("/var/config/db.ini");
+$db = parse_ini_file("");
 //connect to the DB
    $dsn = $db['type']
    . ":host=" . $db['host'] . ";dbname=" . $db['name'] . ";charset=utf8";
